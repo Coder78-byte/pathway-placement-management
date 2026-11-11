@@ -1,0 +1,26 @@
+server:
+  port: ${SERVER_PORT:8080}
+spring:
+  config:
+    import: optional:file:../.env[.properties]
+  datasource:
+    url: ${DB_URL:jdbc:mysql://localhost:3306/placement_management?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC}
+    username: ${DB_USERNAME:placement}
+    password: ${DB_PASSWORD:placement}
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
+  flyway:
+    enabled: true
+  servlet:
+    multipart:
+      max-file-size: 5MB
+      max-request-size: 5MB
+app:
+  jwt-secret: ${JWT_SECRET:development-only-secret-change-this-to-a-long-random-secret-key-1234567890}
+  jwt-expiration-ms: ${JWT_EXPIRATION_MS:86400000}
+  storage-path: ${STORAGE_PATH:./uploads}
+  cors-origin: ${CORS_ORIGIN:http://localhost:5173}
+  admin-email: ${ADMIN_EMAIL:}
+  admin-password: ${ADMIN_PASSWORD:}
